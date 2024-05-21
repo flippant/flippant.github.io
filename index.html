@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <title>Flippantry</title>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <link rel="stylesheet" href="https://flippantry.com/addons/font-awesome-4.7.0/css/font-awesome.min.css">
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route.js"></script>
+
+
+
+</head>
+
+<body ng-app="skillchain" ng-controller="skillchainCtrl">
+
+    <section id="skillchain">
+
+        <div class="container">
+
+            <h2>FFXI Skillchain Calculator</h2>
+
+            
+
+            <br />
+
+            <div class="card">
+
+                <div class="card-body" ng-cloak>
+
+                    <div class="text-center">
+
+                        <button type="button" class="btn mr-2" ng-class="{'btn-primary': form=='makeSC'}" ng-click="(form='makeSC'); error=''">Make a Skillchain</button>
+
+                        <button type="button" class="btn mr-2" ng-class="{'btn-primary': form=='findSC'}" ng-click="(form='findSC'); error=''">Find a Skillchain</button>
+
+                    </div>
+
+                    
+
+                    <hr />
+
+                    <div id="make-sc" ng-show="form=='makeSC'">           
+
+                        <ul class="ongoing-skillchain skillchain-list">
+
+                            <li ng-repeat="item in WSlist">
+
+                                <span class="ws">{{item.ws}}</span><span class="sc {{item.sc}}" ng-bind="item.sc"></span>
+
+                            </li>
+
+                        </ul>
+
+                        <div class="skillchain-select select-container">
+
+                            <select class="ws-list" ng-model="selectedWS">
+
+                                <option value="" selected="selected" disabled>Select a WS</option>
+
+                                <optgroup ng-repeat="(skill,WSarr) in selectWeaponskills" label="{{skill}}">
+
+                                    <option class="{{skill}}" ng-repeat="(WS,prop) in WSarr" value="{{WS}}">{{WS}} {{prop.result}}</option>
+
+                                </optgroup>
+
+                            </select>
+
+                            <button class="btn btn-primary btn-block" ng-click="submitWS()">Submit</button>
+
+                        </div>
+
+                        <br />
+
+                        <div class="text-center" style="position: relative;">
+
+                            <h6><small>{{WSlist | copyText}}</small></h6>
+
+                            <textarea id="ws-copy" class="form-control" ng-model="WSlist | copyText"></textarea>
+
+                            <button class="btn btn-outline-primary" ng-click="copytext('#ws-copy');">Copy To Clipboard</button>  
+
+                            <span class="copied" style="display: none">Copied</span> 
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div id="find-sc" ng-show="form=='findSC'">
+
+                        <div class="skillchain-select select-container">
+
+                            <select class="ws-list" ng-model="selectedSkill1">
+
+                                <option value="" selected="selected" disabled>Start With...</option>
+
+                                <option ng-repeat="(skill,WSarr) in weaponskills" value="{{skill}}">{{skill}}</option>
+
+                            </select>
+
+                            <select class="ws-list" ng-model="selectedSkill2">
+
+                                <option value="" selected="selected" disabled>End With...</option>
+
+                                <option ng-repeat="(skill,WSarr) in weaponskills" value="{{skill}}">{{skill}}</option>
+
+                            </select>
+
+                            <select class="ws-list" ng-model="selectedSC">
+
+                                <option value="" selected="selected" disabled>And Make...</option>
+
+                                <option ng-repeat="(SC,SCarr) in skillchains" value="{{SC}}">{{SC}}</option>
+
+                            </select>
+
+                            <button class="btn btn-primary btn-block" ng-click="findWS()">Submit</button>
+
+                        </div>
+
+                        <ul class="skillchain-combos skillchain-list">
+
+                            <li ng-repeat="combo in combosList">
+
+                                <span class="ws ws1">{{combo.ws1}}</span><span class="ws ws2">{{combo.ws2}}</span><span class="sc {{combo.sc}}">{{combo.sc}}</span>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                    
+
+                    <br />
+
+                    <h6 class="text-center text-danger" ng-show="error"><small>{{error}}</small></h6>
+
+
+
+                    <br />
+
+                    <button type="button" class="float-left btn btn-outline-secondary mr-2" data-target="#skillchain-cheatsheet" data-toggle="modal">View Cheatsheet</button>
+
+                    <button type="button" class="float-left btn btn-outline-secondary" data-target="#skillchain-lookup" data-toggle="modal">WS Lookup</button>
+
+                    <button type="button" class="float-right btn btn-outline-secondary" ng-click="reset()" ng-show="form=='makeSC'">Reset Skillchain</button>
+
+                </div>
+
+            </div>
+
+            
+
+            <div id="skillchain-cheatsheet" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="skillchain-cheatsheet">
+
+                <div class="modal-dialog modal-lg" role="document">
+
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+
+                            <h5 class="modal-title">Skillchain Cheatsheet</h5>
+
+                            <button type="button" class="close" data-dismiss="modal" aria-label="close">
+
+                                <span aria-hidden="true">&times;</span>
+
+                            </button>
+
+                        </div>
+
+                        <div class="modal-body">
+
+                            <ul class="sc-cheatsheet">
+
+                                <li ng-repeat="(prop1,SCarr) in skillchains">
+
+                                    <span class="prop1 {{prop1}}">{{prop1}}</span>
+
+                                    <span class="results">
+
+                                        <span class="result" ng-repeat="(prop2,prop3) in SCarr">
+
+                                            <span class="prop2 {{prop2}}">{{prop2}}</span>
+
+                                            <span class="prop3 {{prop3}}">{{prop3}}</span>
+
+                                        </span>
+
+                                    </span>
+
+                                </li>
+
+                            </ul>
+
+                        </div>       
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            
+
+            <div id="skillchain-lookup" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="skillchain-lookup">
+
+                <div class="modal-dialog modal-lg" role="document">
+
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+
+                            <h5 class="modal-title">Weaponskill Lookup</h5>
+
+                            <button type="button" class="close" data-dismiss="modal" aria-label="close">
+
+                                <span aria-hidden="true">&times;</span>
+
+                            </button>
+
+                        </div>
+
+                        <div class="modal-body">
+
+                            <!-- <div class="row">
+
+                                <div class="col-12">
+
+                                    <div class="form-group">
+
+                                        <input type="text" class="form-control" id="searchText" ng-model="searchText" placeholder="Search for Weaponskill">
+
+                                    </div>
+
+                                </div>
+
+                            </div> -->
+
+                            <div class="row">
+
+                                <div class="col-12 col-md-6">
+
+                                    <div class="select-container">
+
+                                        <select ng-model="searchSkill" ng-change="generateSearch(searchSkill,searchText,searchProp)">
+
+                                            <option value="" selected="selected">Any Skill</option>
+
+                                            <option ng-repeat="(skill,arr) in weaponskills" value="{{skill}}">{{skill}}</option>
+
+                                        </select>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-12 col-md-6">
+
+                                    <div class="select-container">
+
+                                        <select ng-model="searchProp" ng-change="generateSearch(searchSkill,searchText,searchProp)">
+
+                                            <option value="" selected="selected">Any Property</option>
+
+                                            <option ng-repeat="(prop,arr) in skillchains" value="{{prop}}">{{prop}}</option>
+
+                                        </select>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+            
+
+                            <ul class="sc-search-results">
+
+                                <li ng-repeat="(skill,WSarr) in searchResults" label="{{skill}}" ng-class="{searchProp}">
+
+                                    <ul>
+
+                                        <li class="{{skill}}" ng-repeat="(WS,prop) in WSarr" value="{{WS}}">
+
+                                            <span class="ws">{{WS}}</span><span class="sc {{prop.skillchain_a}}">{{prop.skillchain_a}}</span><span class="sc {{prop.skillchain_b}}">{{prop.skillchain_b}}</span><span class="sc {{prop.skillchain_c}}">{{prop.skillchain_c}}</span>
+
+                                        </li>
+
+                                    </ul>                       
+
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <h6>By Ragnarok.Flippant</h6>
+
+        </div>
+
+    </section>
+
+
+
+
+
+    <script src="skillchain.js"></script>
+
+</body>
+
+</html> 

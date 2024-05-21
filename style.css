@@ -1,0 +1,322 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto|Oswald|Roboto+Slab);
+.btn, h1, h2, h3, h4, h5, h6, .skillchain-list, .sc-cheatsheet, .sc-search-results, .select-container {
+  font-family: 'Oswald';
+  text-transform: uppercase; }
+
+/* BOOTSTRAP OVERWRITES */
+.modal-lg {
+  max-width: 1000px; }
+
+.btn {
+  font-size: 14px; }
+
+.card {
+  margin-bottom: 15px; }
+
+body {
+  font-family: 'Roboto';
+  color: #555; }
+
+header {
+  margin-bottom: 100px;
+  border-bottom: 1px solid #00aeef; }
+
+footer {
+  padding: 50px 0px;
+  text-align: center; }
+
+section {
+  position: relative;
+  padding: 50px; }
+  @media only screen and (max-width: 900px) {
+    section {
+      padding: 50px 0px; } }
+
+blockquote {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+  font-family: 'Oswald';
+  font-size: 16px;
+  text-transform: uppercase; }
+  blockquote p {
+    padding-left: 20px;
+    padding-top: 10px;
+    margin-bottom: 5px; }
+  blockquote .fa {
+    position: absolute;
+    left: -15px;
+    opacity: 0.2;
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5), 0px 0px 3px rgba(0, 0, 0, 0.8); }
+
+h2 {
+  position: relative;
+  margin-bottom: 20px; }
+  h2:after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 0px;
+    width: 100px;
+    height: 1px;
+    background: #00aeef; }
+
+h3 {
+  position: relative;
+  text-align: center;
+  margin-bottom: 40px; }
+
+.skillchain-list {
+  list-style: none;
+  margin: 0px;
+  padding: 0px; }
+  .skillchain-list li {
+    margin: 15px 0px;
+    position: relative; }
+    .ongoing-skillchain li::after {
+      content: "\002193";
+      position: absolute;
+      bottom: -15px;
+      left: 49%; }
+      @media only screen and (max-width: 500px) {
+        .ongoing-skillchain li::after {
+          left: 48%; } }
+    @media only screen and (max-width: 500px) {
+      .skillchain-list li {
+        margin: 5px 0px; } }
+  .skillchain-list li span {
+    display: inline-block;
+    padding: 10px;
+    margin: 10px 0px; }
+    @media only screen and (max-width: 500px) {
+      .skillchain-list li span {
+        margin: 0px;
+        padding: 5px; } }
+  .skillchain-list .ws {
+    width: 48%;
+    text-align: right; }
+    @media only screen and (max-width: 500px) {
+      .skillchain-list .ws {
+        margin-right: 10px; } }
+  .skillchain-list .sc {
+    border-radius: 3px; }
+  .skillchain-list .hidden {
+    display: none; }
+
+.skillchain-combos {
+  text-align: center; }
+  .skillchain-combos .ws {
+    width:auto; 
+    display: relative; }
+    .skillchain-combos .ws.ws1::after {
+      content: "\00002B";
+      padding-left: 15px;
+    }
+    .skillchain-combos .ws.ws2::after {
+      content: "\002192";
+      padding-left: 12px;
+    }
+  .skillchain-combos li {
+    margin: 0px }
+
+.sc-cheatsheet {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  font-size: 14px;
+  text-align: center; }
+  .sc-cheatsheet li {
+    margin: 1px;
+    padding: 10px 0px;
+    display: block; }
+  .sc-cheatsheet li + li {
+    border-top: 1px solid #ddd; }
+  .sc-cheatsheet li span {
+    position: relative;
+    padding: 5px 10px;
+    border-radius: 3px; }
+  .sc-cheatsheet .prop1 {
+    display: inline-block;
+    position: relative;
+    top: -20px;
+    text-align: right;
+    margin-right: 30px; }
+    .sc-cheatsheet .prop1::after {
+      content: "\00002B";
+      position: absolute;
+      top: -70%;
+      right: -36px;
+      font-size: 50px;
+      text-shadow: none;
+      color: #444; }
+      @media only screen and (max-width: 500px) {
+        .sc-cheatsheet .prop1::after {
+          display: none; } }
+    @media only screen and (max-width: 500px) {
+      .sc-cheatsheet .prop1 {
+        margin: 0px;
+        top: 0px !important;
+        text-align: center; } }
+  .sc-cheatsheet .results {
+    display: inline-block; }
+  .sc-cheatsheet .result {
+    display: block;
+    padding: 1px 10px 0px; }
+  .sc-cheatsheet .prop2 {
+    display: inline-block;
+    margin-right: 40px; }
+    .sc-cheatsheet .prop2::after {
+      content: "\002192";
+      position: absolute;
+      top: -5px;
+      right: -35px;
+      font-size: 25px;
+      text-shadow: none;
+      color: #444; }
+  .sc-cheatsheet .prop3 {
+    display: inline-block; }
+  .sc-cheatsheet .Transfixion.prop1, .sc-cheatsheet .Scission.prop1, .sc-cheatsheet .Induration.prop1 {
+    top: -38px; }
+  .sc-cheatsheet .Light.prop1, .sc-cheatsheet .Darkness.prop1 {
+    top: 0px; }
+
+.sc-search-results {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  font-size: 14px; }
+  .sc-search-results ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px; }
+  .sc-search-results li {
+    margin: 0px;
+    position: relative; }
+  .sc-search-results li span {
+    display: inline-block;
+    padding: 10px;
+    margin: 1px 1px 0px 0px; }
+  .sc-search-results .ws {
+    width: 300px;
+    text-align: right; }
+  .sc-search-results .hidden {
+    display: none; }
+  @media only screen and (max-width: 500px) {
+    .sc-search-results .ws {
+      display: block;
+      text-align: left;
+      padding: 5px; }
+    .sc-search-results .sc {
+      width: 95px;
+      font-size: 13px;
+      padding: 5px; } }
+
+.Transfixion, .Compression, .Liquefaction, .Scission, .Reverberation, .Detonation, .Induration, .Impaction, .Gravitation, .Distortion, .Fusion, .Fragmentation, .Darkness, .Light {
+  width: 150px;
+  background: #555;
+  color: #fff; }
+  @media only screen and (max-width: 500px) {
+    .Transfixion, .Compression, .Liquefaction, .Scission, .Reverberation, .Detonation, .Induration, .Impaction, .Gravitation, .Distortion, .Fusion, .Fragmentation, .Darkness, .Light {
+      width: 100px; } }
+
+.Transfixion {
+  text-shadow: 0px 0px 1px #000, 0px 0px 6px #FFF; }
+
+.Compression {
+  text-shadow: 0px 0px 1px #000, 0px 0px 6px #000; }
+
+.Liquefaction {
+  text-shadow: 0px 0px 1px #000, 0px 0px 6px #D91E18; }
+
+.Scission {
+  text-shadow: 0px 0px 1px #000, 0px 0px 6px #E87E04; }
+
+.Reverberation {
+  text-shadow: 0px 0px 1px #000, 0px 0px 6px #4183D7; }
+
+.Detonation {
+  text-shadow: 0px 0px 1px #000, 0px 0px 6px #2ECC71; }
+
+.Induration {
+  text-shadow: 0px 0px 1px #000, 0px 0px 6px #6BB9F0; }
+
+.Impaction {
+  text-shadow: 0px 0px 1px #000, 0px 0px 6px #BF55EC; }
+
+.Gravitation {
+  text-shadow: 0px 0px 1px #000, 2px 2px 2px #000, -2px -2px 2px #E87E04; }
+
+.Distortion {
+  text-shadow: 0px 0px 1px #000, 2px 2px 2px #4183D7, -2px -2px 2px #6BB9F0; }
+
+.Fusion {
+  text-shadow: 0px 0px 1px #000, 2px 2px 2px #FFF, -2px -2px 2px #D91E18; }
+
+.Fragmentation {
+  text-shadow: 0px 0px 1px #000, 2px 2px 2px #2ECC71, -2px -2px 2px #BF55EC; }
+
+.Darkness {
+  text-shadow: 0px 0px 1px #000, 2px 2px 2px #4183D7, -2px -2px 2px #6BB9F0, 2px -2px 2px #000, -2px 2px 2px #E87E04; }
+
+.Light {
+  text-shadow: 0px 0px 1px #000, 2px 2px 2px #2ECC71, -2px -2px 2px #BF55EC, 2px -2px 2px #FFF, -2px 2px 2px #D91E18; }
+
+.Transfixion .Transfixion, .Compression .Compression, .Liquefaction .Liquefaction, .Scission .Scission, .Reverberation .Reverberation, .Detonation .Detonation, .Induration .Induration, .Impaction .Impaction,
+.Gravitation .Gravitation, .Distortion .Distorion, .Fusion .Fusion, .Fragmentation .Fragmentation, .Darkness .Darkness, .Light .Light {
+  box-shadow: 0px 0px 5px 5px #6BB9F0; }
+
+.skillchain-select .btn {
+  border-radius: 0px; }
+
+.select-container {
+  width: 350px;
+  margin: 20px auto;
+  overflow: hidden;
+  position: relative;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 18px;
+  font-style: normal; }
+  .select-container select {
+    padding: 10px 20px;
+    width: 370px;
+    background: transparent;
+    border: none;
+    position: relative;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none; }
+  .select-container::after {
+    position: absolute;
+    top: 8px;
+    right: 20px;
+    bottom: 0px;
+    content: "\f0d7";
+    font-family: 'FontAwesome';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    text-decoration: inherit;
+    color: #ddd;
+    pointer-events: none; }
+
+optgroup {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 5px; }
+  optgroup option {
+    font-weight: normal;
+    letter-spacing: 0px;
+    padding: 4px 10px; }
+    
+
+textarea#ws-copy {
+  position: absolute;
+  left: -9999px;
+}
+
+.copied {
+  position: absolute; padding: 5px 15px; margin: 4px; background: #333; color: #fff; border-radius: 2px; font-size: 12px; text-transform: uppercase;
+}
